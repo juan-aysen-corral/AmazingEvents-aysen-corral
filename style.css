@@ -42,8 +42,7 @@
     gap:0.5rem;
   }
   .card{
-    margin-top: 5%;
-    height: 30rem;
+    
     object-fit: fill;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   }
@@ -51,12 +50,20 @@
  
   min-height: 95vh;
 }
+.maind{
+  min-height: 75vh;
+}
 footer{
   margin-top: 5%;
 }
 .ftc{
   float: inline-end;
   min-height: 5vh;
+}
+.card-container{
+  height: 30rem;
+  margin-top: 5%;
+  
 }
 
 .card-container-contact{
@@ -66,7 +73,15 @@ footer{
 .card-container-stats{
   margin-top: 5%;
 }
-  
+.cards{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 1%;
+}
+
+.card-titulo{
+  display: flex;
+  justify-content: center;
+}
   
   .cartas div{
     
