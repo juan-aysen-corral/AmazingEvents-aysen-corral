@@ -1,10 +1,10 @@
 
 let lista = data.events
 function filtradop(filtro){
-    const pasado=[]
+    let pasado=[]
     for (const fecha  of filtro) {
         let anio = fecha.date.split("-")
-        console.log(anio[0])
+        
         if(anio[0] < "2023"){
             pasado.push(fecha)
         }
@@ -41,6 +41,7 @@ function mostrartarjeta (vision  ){
         
     }
 }
+mostrartarjeta(eventoPasado)
 
 function crearbox ( box){
     

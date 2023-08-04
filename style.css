@@ -71,16 +71,26 @@ footer{
 }
 
 .card-container-stats{
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 5%;
+  height: auto;
+  width: 100%;
 }
 .cards{
   height: 25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 1%;
 }
+.listass div{
+  height: auto;
+
+  
+}
 
 .card-titulo{
   display: flex;
+  
   justify-content: center;
 }
   
