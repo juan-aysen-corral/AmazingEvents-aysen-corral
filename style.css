@@ -74,6 +74,7 @@ footer{
   margin-top: 5%;
 }
 .cards{
+  height: 25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 1%;
 }
@@ -96,8 +97,10 @@ footer{
   }
   footer div{
     width: 25%;
-  }
+  } 
   .ff{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     width: 100%;
     display: inline-block;
     display: flex;
@@ -114,11 +117,18 @@ footer{
     align-self: flex-end;
     transform: translate(0%,-120%);
   }
+  footer div {
+    padding-left: 4rem;
+    display: flex;
+    gap:2rem
+  }
   
   footer div p {
  color: aliceblue;
  text-align: center;
   }
+  
+  
   footer img{
     width: 2.3rem;
   }
@@ -138,14 +148,20 @@ footer{
     }
     footer div p {
       color: aliceblue;
-      text-align: center;
+      text-align: end;
+      justify-self: flex-end;
        }
        footer img{
         margin: 0.5rem;
          
        }
        footer div{
+        padding-right: 1rem;
         width: 50%;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        padding-left: 0;
       }
   }
 
