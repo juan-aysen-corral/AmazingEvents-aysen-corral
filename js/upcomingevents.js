@@ -1,11 +1,13 @@
 
 let lista = data.events
-function filtradof(filtro){
+let date= data.currentDate
+function filtradof(filtro,data){
     const futuros=[]
+    const date= filtro.currentDate
     for (const fecha  of filtro) {
-        let anio = fecha.date.split("-")
-        console.log(anio[0])
-        if(anio[0] >= "2023"){
+        
+       
+        if(fecha.date > data){
             futuros.push(fecha)
         }
         
@@ -14,11 +16,12 @@ function filtradof(filtro){
  return futuros
 }
 
-let eventoFuturo = filtradof(lista)
+let eventoFuturo = filtradof(lista,date)
 console.log (eventoFuturo)
 
 function creartarjetas(tarjet){
-    console.log(tarjet)
+    let body = document.getElementById("body")
+    body.style.backgroundColor = "white";
     return `<div class="card-container col-lg-3 col-sm-12 col-md-6 c">
     <div class="cards" style="width: 100; height: 100;">
      <img class="fotos" src=${tarjet.image} alt="...">
@@ -27,10 +30,29 @@ function creartarjetas(tarjet){
      <p class="card-text">${tarjet.description}</p>
      <div class="ff ">
       <p>Price =$ ${tarjet.price}</p>
-     <a href="./paginas/detail.html" class="btn btn-primary">Details</a>
+     <a href="detail.html?id=${tarjet._id} " class="btn btn-primary">Details</a>
     </div>
     </div>
  </div>`
+}
+
+function tarjetError() {
+    let home= document.getElementById(`muchas`)
+   let body = document.getElementById("body")
+    body.style.backgroundColor = "black";
+    let objeto= ` <div class="card-container col-lg-3 col-sm-12 col-md-6 c">
+    <div class="cards" style="width: 100; height: 100;">
+     <img class="fotos" src="https://i.redd.it/0zos7jy4uwsy.jpg" alt="...">
+     <audio src="../imagenes/evilmorty.mp3" autoplay></audio>
+   <div class="card-body error" >
+     <h5 class="card-title">ERROR</h5>
+     <p class="card-text"> Tarjeta no encontrada </p>
+     <div class="ff ">
+    
+    </div>
+    </div>
+ </div>`
+ home.innerHTML =home.innerHTML+ objeto;
 }
 function mostrartarjeta (vision  ){
     let home= document.getElementById(`muchas`)
@@ -48,8 +70,8 @@ mostrartarjeta(eventoFuturo )
 function crearbox ( box){
     
     return  ` <div class="form-check form-check-inline">
-     <input class="form-check-input" type="checkbox" id="${box._id} " value="option7" >
-     <label class="form-check-label" for="${box._id} " > ${box.category} </label>
+     <input class="form-check-input" type="checkbox" id="${box._id}" value="${box.category}">
+     <label class="form-check-label" for="${box._id}" > ${box.category} </label>
    </div>`
     
  
@@ -62,7 +84,7 @@ function crearbox ( box){
          
              const inyergar= crearbox(vista)
              cajas.innerHTML= cajas.innerHTML + inyergar;
-             console.log(vista.id)
+             
          
      }
  }
@@ -86,3 +108,70 @@ for(let categoria of eventoFuturo){
 }
 
 separarCategorias()
+
+
+function cualca (filtradoPorChecks, igualados, search){
+    console.log (search)
+    let home= document.getElementById(`muchas`);
+    home.innerHTML = ""
+    let conectados = filtradoPorChecks.filter(el => {
+            return igualados.includes(el)
+        } )
+    if (conectados.length > 0){
+        mostrartarjeta(conectados);
+        console.log ("entra en conectados")
+    } else{
+        if(filtradoPorChecks.length === 0 && igualados.length == 0 && search == ""){
+            mostrartarjeta(eventoFuturo)
+            console.log (filtradoPorChecks.length)
+        } else if(filtradoPorChecks.length > 0 && igualados.length == 0) {
+            mostrartarjeta(filtradoPorChecks)
+            console.log ("entra en no conectados filtrado > 0")
+        } else if ( igualados.length > 0 && (filtradoPorChecks.length == 0 && search == ""  ) ){
+            mostrartarjeta(igualados)
+            console.log ("entra en no conectados igualados > 0 ")
+        } else {
+            tarjetError()
+        }
+    }
+
+}
+
+
+let arrayDeCajitas = document.getElementById("cajitas")
+const search = document.getElementById("search")
+arrayDeCajitas.addEventListener("change", manejarSearch)
+search.addEventListener("input",manejarSearch)
+
+function manejarSearch(){
+    /*filtrado de search */
+    let filtradoNombreEvento = filtradoPorNombre(eventoFuturo,search.value)
+   
+    let filtradoPorChecks=  filtradoNombreEvento
+    
+    /*filtrado de check */
+    let checkbox = document.querySelectorAll("input[type='checkbox']")
+    let arrayChecked= Array.from(checkbox).filter(checkbox=> checkbox.checked)
+    let arrayValoresCheck = arrayChecked.map(elemento => elemento.value)
+    let igualados = eventoFuturo.filter(elemen => arrayValoresCheck.includes(elemen.category))
+
+    
+    cualca(filtradoPorChecks, igualados, search.value)
+
+}
+
+
+ function filtradoPorNombre (arrayevento,nombreeventos){
+    
+    const filtrado = arrayevento.filter(eventm => {
+        if(nombreeventos !== ""){
+            return eventm.name.toLowerCase().includes(nombreeventos.toLowerCase())
+        } else{
+            return null }
+            } 
+        )
+    
+        return filtrado
+   
+
+ } 
